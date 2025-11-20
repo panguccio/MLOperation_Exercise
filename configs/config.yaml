@@ -1,36 +1,32 @@
 model:
-  random_state: 42
+  # Algorithm selection
+  type: "arf"          # or "random_forest" or "arf_classifier"
+  
+  # River ARF parameters (online random forest)
+  n_models: 10
+  seed: 42
   max_depth: 20
+
+  # Traditional sklearn RF params 
+  n_estimators: 100
+  random_state: 42
 
 training:
   batch_size: 1
   epochs: 1
-  delay: 2  # Delay between samples in seconds
-
+  delay: 2
 
 project:
   name: "iris-mlops-project"
   base_dir: "."
 
 neptune:
-  # REPLACE THESE WITH YOUR REAL CREDENTIALS
-  project: "emmadariol/MLops"
-  api_token: "eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJiZmMwMmNjNC03NmY4LTQ3ZDEtOTMxNS1kYWU0M2U4ZWU4MTkifQ=="
-  # Use 'debug' mode to run without sending data if you don't have keys yet
-  mode: "async" 
-
-model:
-  type: "random_forest"
-  n_estimators: 100
-  max_depth: 5
-  random_state: 42
+  mode: "async"
 
 data:
-  filepath: "data/iris.csv" # Will be downloaded by loader
+  filepath: "data/iris.csv"
   test_size: 0.2
 
 ct_pipeline:
-  # Threshold for drift detection (e.g., Kolmogorov-Smirnov p-value)
-  # If p-value < threshold, distributions are different -> DRIFT DETECTED
   drift_p_value_threshold: 0.05
   check_interval_seconds: 5

@@ -25,7 +25,7 @@ def get_new_data_batch(n_samples=50, drift_simulation=False):
     batch_X = X[indices]
     
     if drift_simulation:
-        print("⚠️ SIMULATING DATA DRIFT (Shift +2.0 to Sepal Length)")
+        print("SIMULATING DATA DRIFT (Shift +2.0 to Sepal Length)")
         # We modify the first column (sepal length) to create statistical drift
         batch_X[:, 0] += 2.0 
         
