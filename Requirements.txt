@@ -1,0 +1,8 @@
+neptune
+scikit-learn
+pandas
+numpy
+pyyaml
+scipy
+joblib
+river
