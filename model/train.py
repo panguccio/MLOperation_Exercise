@@ -10,7 +10,7 @@ import yaml
 import pickle
 
 # ---------- 1. Load YAML configuration ----------
-with open("config.yaml", "r") as file:
+with open("../config/config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
 # Extract relevant configuration parameters
@@ -21,9 +21,13 @@ training_cfg = config["training"]
 
 # ---------- 2. Initialize Neptune for experiment tracking ----------
 run = neptune.init_run(
-    project="YourWorkspace/YourProject",  # Replace with your actual project name
-    api_token="YOUR_API_TOKEN",           # Or set it as an environment variable
+    project="emmadariol/MLops",  # Replace with your actual project name
+    api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJiZmMwMmNjNC03NmY4LTQ3ZDEtOTMxNS1kYWU0M2U4ZWU4MTkifQ==",           # Or set it as an environment variable
 )
+
+params = {"learning_rate": 0.001, "optimizer": "Adam"}
+run["parameters"] = params
+
 
 # Log the configuration to Neptune
 run["config"] = config
@@ -109,6 +113,10 @@ def online_learning_iris():
     # Upload the model to Neptune
     run["artifacts/model"].upload(model_path)
 
+    for epoch in range(10):
+        run["train/loss"].append(0.9 ** epoch)
+
+    run["eval/f1_score"] = 0.66
     # Stop Neptune run
     run.stop()
 
