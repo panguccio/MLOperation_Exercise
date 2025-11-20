@@ -134,5 +134,3 @@ def train_or_update_model(new_data_df=None):
 
 if __name__ == "__main__":
     train_or_update_model()
-
-#setx NEPTUNE_API_TOKEN "eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJiZmMwMmNjNC03NmY4LTQ3ZDEtOTMxNS1kYWU0M2U4ZWU4MTkifQ=="
